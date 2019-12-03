@@ -1,6 +1,6 @@
 version: "3"
 services:
-  agent-rpmbuild:
+  agent-xone-rpmbuild:
     image: xonebuild:v0.1
     container_name: agent-xonebuild-docker
     restart: always
