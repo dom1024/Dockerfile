@@ -15,7 +15,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\
     yum-config-manager --add-repo http://mirrors.xuncetech.com/xunce/xunce-dev/yum/el7/xunce-dev.repo &&\
     yum install -y epel-release ntp yum-plugin-fastestmirror vim-enhanced ntp wget bash-completion elinks lrzsz unix2dos dos2unix git java-1.8.0-openjdk openssl-devel \
     rpm-build.x86_64 wget sudo vim unix2dos dos2unix which automake autoconf autogen libtool gettext-devel libcurl-devel unixODBC-devel &&\
-    yum install centos-release-scl -y  && yum -y install devtoolset-7 &&\
+    yum install centos-release-scl -y  && yum -y --enablerepo=centos-sclo-rh install devtoolset-7 &&\
     scl enable devtoolset-7 bash && echo "source /opt/rh/devtoolset-7/enable" >> /root/.bashrc &&\
     yum install -y --enablerepo=xunce-dev \
 		fastdfs-5.11\
