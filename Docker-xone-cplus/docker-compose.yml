@@ -1,0 +1,118 @@
+version: "3"
+services:
+  xone-gateway:
+    image: wusong1024/xone-cplus-deploy
+    restart: always
+    hostname: xone-gateway
+    container_name: xone-gateway
+    command: ['systemctl restart xc@gateway']
+    ports:
+      - 8062:8062
+    volumes:
+      - ./config/profile:/home/frame/profile
+    privileged: true
+    networks:
+      - xunce
+
+  xone-mysqlservice:
+    image: wusong1024/xone-cplus-deploy
+    restart: always
+    hostname: xone-mysqlservice
+    container_name: xone-mysqlservice
+    command: ['systemctl restart xc@mysqlservice']
+    ports:
+      - 8073:8073
+    volumes:
+      - ./config/profile:/home/frame/profile
+    privileged: true
+    networks:
+      - xunce
+      
+   xone-basicservice:
+    image: wusong1024/xone-cplus-deploy
+    restart: always
+    hostname: xone-basicservice
+    container_name: xone-basicservice
+    command: ['systemctl restart xc@basicservice']
+    ports:
+      - 8001:8001
+    volumes:
+      - ./config/profile:/home/frame/profile
+    privileged: true
+    networks:
+      - xunce
+      
+  xone-brokerservice:
+    image: wusong1024/xone-cplus-deploy
+    restart: always
+    hostname: xone-brokerservice
+    container_name: xone-brokerservice
+    command: ['systemctl restart xc@brokerservice']
+    ports:
+      - 8031:8031
+      - 8032:8032
+    volumes:
+      - ./config/profile:/home/frame/profile
+    privileged: true
+    networks:
+      - xunce
+ 
+  xone-orderservice:
+    image: wusong1024/xone-cplus-deploy
+    restart: always
+    hostname: xone-orderservice
+    container_name: xone-orderservice
+    command: ['systemctl restart xc@orderservice']
+    ports:
+      - 8050:8050
+      - 8052:8052
+    volumes:
+      - ./config/profile:/home/frame/profile
+    privileged: true
+    networks:
+      - xunce
+      
+  xone-queryservice:
+    image: wusong1024/xone-cplus-deploy
+    restart: always
+    hostname: xone-queryservice
+    container_name: xone-queryservice
+    command: ['systemctl restart xc@queryservice']
+    ports:
+      - 8851:8851
+      - 8853:8853
+    volumes:
+      - ./config/profile:/home/frame/profile
+    privileged: true
+    networks:
+      - xunce
+      
+  xone-liquidateservice:
+    image: wusong1024/xone-cplus-deploy
+    restart: always
+    hostname: xone-liquidateservice
+    container_name: xone-liquidateservice
+    command: ['systemctl restart xc@liquidateservice']
+    ports:
+      - 9527:9527
+    volumes:
+      - ./config/profile:/home/frame/profile
+    privileged: true
+    networks:
+      - xunce
+      
+  xone-quantservice:
+    image: wusong1024/xone-cplus-deploy
+    restart: always
+    hostname: xone-quantservice
+    container_name: xone-quantservice
+    command: ['systemctl restart xc@quantservice']
+    ports:
+      - 8860:8860
+    volumes:
+      - ./config/profile:/home/frame/profile
+    privileged: true
+    networks:
+      - xunce
+ networks:
+  xunce:
