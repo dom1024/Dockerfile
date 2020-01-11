@@ -1,4 +1,4 @@
-FROM wusong1024/xone-cplus-dev as build
+FROM wusong1024/xone-cplus-dev:v1.0.1 as build
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-dev" \
       author="song.wu" \
@@ -9,12 +9,12 @@ LABEL maintainer="<song.wu@xuncetech.com>" \
 COPY src /tmp/src
 
 RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
-    && ldconfig \
+    && ldconfig && source /root/.bashrc \
     && cd /tmp/src/cpp/ && cmake . && make -j16 && make install \
-    && rm -rf /tmp/src \
+    && rm -rf /tmp/src 
 
 #基础部署环境
-FROM wusong1024/xone-cplus-deploy
+FROM wusong1024/xone-cplus-deploy:v1.0.1
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-deploy" \
       author="song.wu" \
@@ -22,11 +22,7 @@ LABEL maintainer="<song.wu@xuncetech.com>" \
       systemver="Centos7.5" \
       desc="xone cplus env" \
       build-date="20200101"
-COPY --from=build /usr/bin/protoc /usr/bin/protoc
-COPY --from=build /usr/bin/quantlib-config /usr/bin/quantlib-config
-COPY --from=build /usr/bin/quantlib-test-suite /usr/bin/quantlib-config
-COPY --from=build /usr/lib /usr/lib
-COPY --from=build /usr/lib64 /usr/lib64
+COPY --from=build /usr/lib/uvframe /usr/lib/uvframe
 COPY --from=build /etc/uvframe /etc/uvframe
 COPY --from=build /etc/ld.so.conf.d /etc/ld.so.conf.d
 COPY --from=build /usr/bin/uvframe /usr/bin/uvframe
