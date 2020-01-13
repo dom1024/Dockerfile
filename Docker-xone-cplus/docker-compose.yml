@@ -1,10 +1,10 @@
 version: "3"
 services: 
-  xone-gateway: 
+  xone-gateway-c: 
     image: xone/cplus:v1.0.1
     restart: always
-    hostname: xone-gateway
-    container_name: xone-gateway
+    hostname: xone-gateway-c
+    container_name: xone-gateway-c
     command: /usr/bin/uvframe /etc/uvframe/gateway.xml 
     ports:
       - 8062:8062
