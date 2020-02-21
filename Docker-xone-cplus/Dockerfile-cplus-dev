@@ -11,7 +11,7 @@ COPY 3rd_src.tar.gz /tmp/3rd_src.tar.gz
 RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && yum install epel-release -y \
     && yum install centos-release-scl -y \
-    && yum install devtoolset-7-make devtoolset-7-gcc devtoolset-7-gcc-c++ libtool boost-devel openssl-devel file libuv-devel cmake3 -y \
+    && yum install devtoolset-7-make devtoolset-7-gcc devtoolset-7-gcc-c++ libtool boost-devel openssl-devel file libuv-devel cmake3 c-ares-devel -y \
     && scl enable devtoolset-7 bash \
     && echo "source /opt/rh/devtoolset-7/enable" >> /root/.bashrc \
     && source /root/.bashrc \
