@@ -18,15 +18,18 @@ RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && ln -sf /usr/bin/cmake3 /usr/bin/cmake \
     && cd /tmp \
     && tar -zxf 3rd_src.tar.gz && cd 3rd_src \
+    && yum localinstall *.rpm -y \
     && tar -zxf hiredis-0.14.0.tar.gz && cd hiredis-0.14.0 && make -j16 && make install && cd .. \
     && tar -zxf jsoncpp-1.8.0.tar.gz && cd jsoncpp-1.8.0 && cmake -DCMAKE_BUILD_TYPE=release -DBUILD_STATIC_LIBS=ON -DBUILD_SHARED_LIBS=ON -DCMAKE_INSTALL_PREFIX=/usr/ . && make -j16 && make install && cd ..\
     && tar -zxf libzmq-4.2.1.tar.gz && cd libzmq-4.2.1 && ./autogen.sh && ./configure --prefix=/usr && make -j16 && make install && cd .. \
-    && tar -zxf protobuf-3.6.1.tar.gz && cd protobuf-3.6.1 && ./autogen.sh && ./configure --prefix=/usr && make -j16 && make install && cd .. \
+    && tar -zxf protobuf-3.10.1.tar.gz && cd protobuf-3.10.1 && ./autogen.sh && ./configure --prefix=/usr && make -j16 && make install && cd .. \
     && tar -zxf QuantLib-1.16.tar.gz && cd QuantLib-1.16 && ./autogen.sh && ./configure --prefix=/usr && make -j16 && make install && cd .. \
     && tar -zxf spdlog-1.1.0.tar.gz && cd spdlog-1.1.0 && cmake -DCMAKE_INSTALL_PREFIX=/usr . && make -j16 && make install && cd ..\
     && tar -zxf tinyxml2-7.0.0.tar.gz && cd tinyxml2-7.0.0 && cmake -DCMAKE_INSTALL_PREFIX=/usr . && make -j16 && make install && cd ..\
     && tar -zxf uWebSockets-0.14.10.tar.gz && cd uWebSockets-0.14.10 && cmake . && make -j16 && make install && cd ..\
     && tar -zxf xlslib-2.4.0.tar.gz && cd xlslib-2.4.0 && sed -i '80s/CCLD/CXXLD/' ./targets/test/Makefile.in && ./configure --prefix=/usr && make -j16 && make install && cd .. \ 
+    && tar -zxf grpc-1.25.0.tar.gz && cd grpc-1.25.0 && make -j16 && make install && cd .. \
+    && tar -zxf zookeeper-release-3.5.5.tar.gz && cd zookeeper-release-3.5.5 && ant compile_jute && cd zookeeper-client/zookeeper-client-c && autoreconf -if && ./configure --prefix=/usr && make -j16 && make install && cd .. \
     && yum install libcurl-devel zlib-devel libuuid-devel -y \
     && rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm \
     && yum install --enablerepo=mysql80-community --disablerepo=mysql56-community mysql-community-devel -y \ 
@@ -45,9 +48,7 @@ LABEL maintainer="<song.wu@xuncetech.com>" \
       systemver="Centos7.5" \
       desc="xone cplus env" \
       build-date="20200101"
-COPY --from=build /usr/bin/protoc /usr/bin/protoc
-COPY --from=build /usr/bin/quantlib-config /usr/bin/quantlib-config
-COPY --from=build /usr/bin/quantlib-test-suite /usr/bin/quantlib-config
+COPY --from=build /usr/bin /usr/bin
 COPY --from=build /usr/lib /usr/lib
 COPY --from=build /usr/lib64 /usr/lib64
 #COPY --from=build /etc/uvframe /etc/uvframe
