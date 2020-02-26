@@ -11,7 +11,7 @@ COPY 3rd_src.tar.gz /tmp/3rd_src.tar.gz
 RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && yum install epel-release -y \
     && yum install centos-release-scl -y \
-    && yum install devtoolset-7-make devtoolset-7-gcc devtoolset-7-gcc-c++ libtool boost-devel openssl-devel file libuv-devel cmake3 c-ares-devel -y \
+    && yum install devtoolset-7-make devtoolset-7-gcc devtoolset-7-gcc-c++ libtool boost-devel openssl-devel file libuv-devel cmake3 c-ares-devel c-ares which ant cppunit-devel -y \
     && scl enable devtoolset-7 bash \
     && echo "source /opt/rh/devtoolset-7/enable" >> /root/.bashrc \
     && source /root/.bashrc \
@@ -28,7 +28,7 @@ RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && tar -zxf tinyxml2-7.0.0.tar.gz && cd tinyxml2-7.0.0 && cmake -DCMAKE_INSTALL_PREFIX=/usr . && make -j16 && make install && cd ..\
     && tar -zxf uWebSockets-0.14.10.tar.gz && cd uWebSockets-0.14.10 && cmake . && make -j16 && make install && cd ..\
     && tar -zxf xlslib-2.4.0.tar.gz && cd xlslib-2.4.0 && sed -i '80s/CCLD/CXXLD/' ./targets/test/Makefile.in && ./configure --prefix=/usr && make -j16 && make install && cd .. \ 
-    && tar -zxf grpc-1.25.0.tar.gz && cd grpc-1.25.0 && make -j16 && make install && cd .. \
+    && tar -zxf grpc-1.25.0.tar.gz && cd grpc-1.25.0 && ldconfig && make -j16 && make install && cd .. \
     && tar -zxf zookeeper-release-3.5.5.tar.gz && cd zookeeper-release-3.5.5 && ant compile_jute && cd zookeeper-client/zookeeper-client-c && autoreconf -if && ./configure --prefix=/usr && make -j16 && make install && cd .. \
     && yum install libcurl-devel zlib-devel libuuid-devel -y \
     && rpm -ivh https://dev.mysql.com/get/mysql80-community-release-el7-3.noarch.rpm \
@@ -36,9 +36,9 @@ RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && sed -i '1034s/[<>]/"/g' /usr/include/mysql/mysql_com.h \
     && ldconfig \
     && rm -f /usr/lib/libQuantLib.a \
-    && rm -rf /tmp/3rd_src \
+    && rm -rf /tmp/3rd_src* \
     && yum clean all
-	
+
 USER root
 
 CMD ["/usr/sbin/init"]
