@@ -1,24 +1,25 @@
-FROM wusong1024/xone-cplus-dev:v1.0.1 as build
+FROM wusong1024/xone-cplus-dev:v1.0.2 as build
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-dev" \
       author="song.wu" \
-      version="v1.0.1" \
+      version="v1.0.2" \
       systemver="Centos7.5" \
       desc="xone cplus env" \
       build-date="20200101"
-COPY src /tmp/src
+COPY XONE /tmp/XONE
 
 RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && ldconfig && source /root/.bashrc \
-    && cd /tmp/src/cpp/ && cmake . && make -j16 && make install \
+    && cp /tmp/XONE/3rdparty/hs/libt2sdk.so /usr/lib/ && ldconfig \
+    && cd /tmp/XONE/src/cpp/ && cmake . && make -j16 && make install \
     && rm -rf /tmp/src 
 
 #基础部署环境
-FROM wusong1024/xone-cplus-deploy:v1.0.1
+FROM wusong1024/xone-cplus-deploy:v1.0.2
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-deploy" \
       author="song.wu" \
-      version="v1.0.1" \
+      version="v1.0.2" \
       systemver="Centos7.5" \
       desc="xone cplus env" \
       build-date="20200101"
