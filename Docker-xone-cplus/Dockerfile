@@ -1,11 +1,11 @@
-FROM wusong1024/xone-cplus-dev:v1.0.2 as build
+FROM wusong1024/xone-cplus-dev:v1.0.3 as build
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-dev" \
       author="song.wu" \
-      version="v1.0.2" \
+      version="v1.0.3" \
       systemver="Centos7.5" \
       desc="xone cplus env" \
-      build-date="20200101"
+      build-date="2020317"
 COPY XONE /tmp/XONE
 
 RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
@@ -15,14 +15,14 @@ RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && rm -rf /tmp/src 
 
 #基础部署环境
-FROM wusong1024/xone-cplus-deploy:v1.0.2
+FROM wusong1024/xone-cplus-deploy:v1.0.3
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-deploy" \
       author="song.wu" \
-      version="v1.0.2" \
+      version="v1.0.3" \
       systemver="Centos7.5" \
       desc="xone cplus env" \
-      build-date="20200101"
+      build-date="20200317"
 COPY --from=build /usr/lib/uvframe /usr/lib/uvframe
 COPY --from=build /etc/uvframe /etc/uvframe
 COPY --from=build /etc/ld.so.conf.d /etc/ld.so.conf.d
