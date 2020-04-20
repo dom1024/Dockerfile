@@ -1,7 +1,7 @@
 version: "3"
 services: 
   xone-gateway-c: 
-    image: xone/cplus:v1.0.1
+    image: xone/cplus:v1.0.3
     restart: always
     hostname: xone-gateway-c
     container_name: xone-gateway-c
@@ -15,7 +15,7 @@ services:
       - xunce
 
   xone-mysqlservice:
-    image: xone/cplus:v1.0.1
+    image: xone/cplus:v1.0.3
     restart: always
     hostname: xone-mysqlservice
     container_name: xone-mysqlservice
@@ -29,7 +29,7 @@ services:
       - xunce
       
   xone-basicservice:
-    image: xone/cplus:v1.0.1
+    image: xone/cplus:v1.0.3
     restart: always
     hostname: xone-basicservice
     container_name: xone-basicservice
@@ -43,7 +43,7 @@ services:
       - xunce
       
   xone-brokerservice:
-    image: xone/cplus:v1.0.1
+    image: xone/cplus:v1.0.3
     restart: always
     hostname: xone-brokerservice
     container_name: xone-brokerservice
@@ -58,7 +58,7 @@ services:
       - xunce
  
   xone-orderservice:
-    image: xone/cplus:v1.0.1
+    image: xone/cplus:v1.0.3
     restart: always
     hostname: xone-orderservice
     container_name: xone-orderservice
@@ -73,7 +73,7 @@ services:
       - xunce
       
   xone-queryservice:
-    image: xone/cplus:v1.0.1
+    image: xone/cplus:v1.0.3
     restart: always
     hostname: xone-queryservice
     container_name: xone-queryservice
@@ -88,7 +88,7 @@ services:
       - xunce
       
   xone-liquidateservice:
-    image: xone/cplus:v1.0.1
+    image: xone/cplus:v1.0.3
     restart: always
     hostname: xone-liquidateservice
     container_name: xone-liquidateservice
@@ -102,7 +102,7 @@ services:
       - xunce
       
   xone-quantservice:
-    image: xone/cplus:v1.0.1
+    image: xone/cplus:v1.0.3
     restart: always
     hostname: xone-quantservice
     container_name: xone-quantservice
