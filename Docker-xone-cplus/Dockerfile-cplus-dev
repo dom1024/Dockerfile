@@ -2,16 +2,16 @@ FROM centos:centos7.5.1804 as build
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-dev" \
       author="song.wu" \
-      version="v1.0.3" \
+      version="v1.0.4" \
       systemver="Centos7.5" \
       desc="xone cplus env" \
-      build-date="20200317"
+      build-date="20200429"
 COPY 3rd_src.tar.gz /tmp/3rd_src.tar.gz
 
 RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && yum install epel-release -y \
     && yum install centos-release-scl -y \
-    && yum install devtoolset-7-make devtoolset-7-gcc devtoolset-7-gcc-c++ libtool boost-devel openssl-devel file libuv-devel cmake3 c-ares-devel c-ares which ant cppunit-devel glog-devel leveldb-devel libatomic unzip gflags-devel -y \
+    && yum install devtoolset-7-make devtoolset-7-gcc devtoolset-7-gcc-c++ devtoolset-7-gdb libtool boost-devel openssl-devel file libuv-devel cmake3 c-ares-devel c-ares which ant cppunit-devel glog-devel leveldb-devel libatomic unzip gflags-devel -y \
     && ln -sf /usr/lib64/libatomic.so.1 /usr/lib64/libatomic.so \
     && scl enable devtoolset-7 bash \
     && echo "source /opt/rh/devtoolset-7/enable" >> /root/.bashrc \
@@ -37,6 +37,11 @@ RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && sed -i '1034s/[<>]/"/g' /usr/include/mysql/mysql_com.h \
     && ldconfig \
     && rm -f /usr/lib/libQuantLib.a \
+    && rm -f /usr/lib/libbrpc.a \
+    && rm -f /usr/lib/libzmq.a \
+    && rm -f /usr/lib64/libprotobuf.a \
+    && rm -f /usr/lib64/libprotoc.a \
+    && rm -f /usr/bin/quantlib-test-suite \
     && rm -rf /tmp/3rd_src* \
     && yum clean all
 
