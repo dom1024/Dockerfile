@@ -1,4 +1,4 @@
-FROM wusong1024/xone-cplus-dev:v1.0.3 as build
+FROM wusong1024/xone-cplus-dev as build
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-dev" \
       author="song.wu" \
@@ -15,7 +15,7 @@ RUN set +x && ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \
     && rm -rf /tmp/src 
 
 #基础部署环境
-FROM wusong1024/xone-cplus-deploy:v1.0.3
+FROM wusong1024/xone-cplus-deploy
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-deploy" \
       author="song.wu" \
