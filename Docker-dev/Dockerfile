@@ -13,7 +13,7 @@ COPY Resources /tmp/Resources
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\
     yum-config-manager --add-repo http://mirrors.aliyun.com/repo/Centos-7.repo &&\
     yum-config-manager --add-repo http://mirrors.xuncetech.com/xunce/xunce-dev/yum/el7/xunce-dev.repo &&\
-    yum install -y epel-release yum-plugin-fastestmirror vim-enhanced wget bash-completion elinks dos2unix git java-1.8.0-openjdk openssl-devel \
+    yum install -y epel-release yum-plugin-fastestmirror vim-enhanced wget bash-completion elinks dos2unix git java-1.8.0-openjdk-devel openssl-devel libuv-devel\
     rpm-build.x86_64 sudo vim which automake autoconf autogen libtool gettext-devel libcurl-devel unixODBC-devel &&\
     yum install centos-release-scl -y  && yum -y --enablerepo=centos-sclo-rh install devtoolset-7 &&\
     yum install -y --enablerepo=xunce-dev \
@@ -33,7 +33,11 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\
 	zookeeper-client-3.5.5 \
 	mysql-community-common-5.6.41 \
 	mysql-community-libs-5.6.41 \
-	QuantLib-1.16 &&\
+        hiredis-vip-1.0.0\
+        oracle-instantclient11.2-devel \
+        librdkafka \
+	QuantLib-1.16 \
+        yaml-cpp-0.6.3 &&\
     rm -rf /usr/bin/quantlib-test-suite &&\
     rm -rf /usr/lib/*.a$ &&\
     wget https://mirrors.tuna.tsinghua.edu.cn/apache/maven/maven-3/3.6.3/binaries/apache-maven-3.6.3-bin.tar.gz -P /tmp && tar xf /tmp/apache-maven-3.6.3-bin.tar.gz -C /opt &&\
@@ -44,7 +48,8 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &&\
     cp -r /tmp/Resources/agent.jar /usr/bin/agent.jar && \
     cp -r /tmp/Resources/jenkins.sh /usr/local/bin/jenkins.sh && \
     chmod +x /usr/bin/agent.jar && chmod +x /usr/local/bin/jenkins.sh && \
-    cp -f /tpm/Resources/bashrc /root/.bashrc &&\
+    cp -f /tmp/Resources/bashrc /root/.bashrc &&\
+    cp -f /tmp/Resources/settings.xml /opt/apache-maven-3.6.3/conf/settings.xml &&\
     yum clean all && ldconfig
 
 #EXPOSE 10050
