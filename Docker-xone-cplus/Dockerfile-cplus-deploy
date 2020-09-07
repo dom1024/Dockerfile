@@ -1,11 +1,11 @@
-FROM wusong1024/xone-cplus-dev:v1.0.4
+FROM wusong1024/xone-cplus-dev:v1.0.5
 LABEL maintainer="<song.wu@xuncetech.com>" \
       name="xone-cplus-deploy" \
       author="song.wu" \
-      version="v1.0.4" \
+      version="v1.0.5" \
       systemver="Centos7.5" \
       desc="xone cplus env" \
-      build-date="20200429"
+      build-date="20200728"
 
 
 RUN echo '/usr/lib/uvframe/' > /etc/ld.so.conf.d/uvframe.conf \
