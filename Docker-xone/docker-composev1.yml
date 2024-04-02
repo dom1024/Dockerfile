@@ -1,0 +1,11 @@
+version: "3"
+services:
+  agent-xone-rpmbuild:
+    image: xonebuild:v0.1
+    container_name: agent-xonebuild-docker
+    restart: always
+    privileged: true
+    environment:
+      - JENKINS_URL=http://192.168.0.29:8080/computer/xc-xone-build/slave-agent.jnlp
+      - JENKINS_SECRET=4a3b8eade65d5366c04cb96aed38d1be9a0964a15a029fedd378f049aaa0948a
+      - JENKINS_AGENT_WORKDIR=/data/jenkins_home
